@@ -1,14 +1,28 @@
-
 import streamlit as st
+import matplotlib.pyplot as plt
 
-def cal_rectangle(w,h):
-    return w*h
+st.set_page_config(page_title="Area Calculator - Rectangle", page_icon=":guardsman:", layout="wide")
 
-st.title("Area Calculator")
-st.write("this is the calculator app")
+def cal_rectangle(w, h):
+    return w * h
 
-radius = st.number_input("Enter Radius")
-submit_btn = st.button("submit")
-if submit_btn:
-    area = cal_rectangle()
-    st.write(f"Area of rectangle is{area}")
+st.title("Area Calculator - Rectangle")
+st.write("This is the calculator app")
+
+# Rectangle Calculation
+st.header("Rectangle Calculation")
+width = st.number_input("Enter Width of Rectangle")
+height = st.number_input("Enter Height of Rectangle")
+
+if width > 0 and height > 0:
+    area_rectangle = cal_rectangle(width, height)
+    st.write(f"Area of Rectangle is: {area_rectangle:.2f}")
+
+    # Display Rectangle
+    fig, ax = plt.subplots()
+    ax.plot([0, width, width, 0, 0], [0, 0, height, height, 0], color='green')
+    ax.fill([0, width, width, 0, 0], [0, 0, height, height, 0], color='lightgreen', alpha=0.6)
+    ax.set_aspect('equal')
+    ax.set_title(f"Rectangle: {width} x {height}")
+
+    st.pyplot(fig)
